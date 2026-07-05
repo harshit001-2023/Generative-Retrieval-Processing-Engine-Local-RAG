@@ -1,0 +1,66 @@
+What is Embedding in Machine Learning?
+1. Artificial Intelligence and Machine Learning
+->In AI, an embedding is a learned, numerical representation of data. Instead of analyzing raw text,
+computers translate words or phrases into sequences of numbers (vectors).
+
+Semantic Proximity:
+->In this numerical space, items with similar meanings are positioned close together.
+
+For example,
+the vectors for "puppy" and "dog" will be physically close, while "spoon" will be far away.
+Use Cases: This allows Large Language Models (LLMs) to perform tasks like
+search, recommendations, and chatbot responses by comparing meanings rather than just matching keywords.
+
+========================================================================================================================
+How to use HuggingFace Model?
+-> In this project I am using "HuggingFace Model" using Models in Python which is
+the Quickest way of
+
+Method: Using Models in Python
+
+To use models in your own applications, you can utilize the 'transformers' library.
+
+1. The Quickest Way: Using 'pipeline'
+
+The 'pipeline' function is the easiest way to use a model. It automatically handles the tokenization and model loading.
+
+First, install the necessary library in your terminal:
+
+bash
+'''
+pip install transformers torch
+'''
+
+Then, run a sentiment analysis model directly in your Python code:
+python
+'''
+from transformers import pipeline
+
+# Load the sentiment analysis pipeline
+classifier = pipeline("sentiment-analysis")
+
+# Run the model
+result = classifier("I love using Hugging Face models!")
+print(result)
+'''
+-------------------------------------------------------------------------------------------------------------------
+
+2. The Advanced Way: Loading a Model and Tokenizer separately
+
+For more control over how the inputs and outputs are processed, you can explicitly load the tokenizer (which converts text to numbers) and the model.
+python
+'''
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+model_name = "bert-base-uncased"
+
+# Load tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+# Tokenize text
+inputs = tokenizer("Hello, how are you?", return_tensors="pt")
+
+# Pass inputs into the model
+outputs = model(**inputs)
+'''

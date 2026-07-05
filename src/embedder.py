@@ -1,4 +1,5 @@
-# Week 2	Convert chunks into "embeddings" using a free local model	What embeddings are, how to use Hugging Face models
+# Week 2	Convert chunks into "embeddings" using a free local model
+# What embeddings are, how to use Hugging Face models
 
 def convert_chunks_to_embeddings(chunks):
     """

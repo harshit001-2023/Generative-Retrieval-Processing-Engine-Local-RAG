@@ -1,4 +1,5 @@
-# Creating a Python script that reads text files and splits them into chunksFile I/O, string manipulation
+# Creating a Python script that reads text files and splits them into chunks
+# File I/O, string manipulation
 
 def split_file_into_chunks(file_path, chunk_size):
     """
@@ -9,7 +10,7 @@ def split_file_into_chunks(file_path, chunk_size):
     :return: A list of chunks.
     """
     chunks = []
-    
+    # Handling file and String Manipulation
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
