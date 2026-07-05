@@ -10,7 +10,6 @@ def split_file_into_chunks(file_path, chunk_size):
     :return: A list of chunks.
     """
     chunks = []
-    # Handling file and String Manipulation
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
@@ -20,15 +19,16 @@ def split_file_into_chunks(file_path, chunk_size):
         print(f"Error: The file {file_path} was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
-    
+
     return chunks
+
 
 def main():
     file_path = input("Enter the path to the text file: ")
     chunk_size = int(input("Enter the chunk size (number of characters): "))
-    
+
     chunks = split_file_into_chunks(file_path, chunk_size)
-    
+
     for index, chunk in enumerate(chunks):
         print(f"Chunk {index + 1}:\n{chunk}\n{'-' * 40}")
 
