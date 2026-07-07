@@ -1,38 +1,33 @@
 # Creating a Python script that reads text files and splits them into chunks
 # File I/O, string manipulation
 # This is a Chunker module that can be imported into other scripts
+# src/chunker.py — The "Lego brick" version
+import os
+from typing import List, Dict
 
-def split_file_into_chunks(file_path, chunk_size):
+
+def chunk_documents(data_dir: str, chunk_size: int = 500, overlap: int = 50) -> List[Dict]:
     """
-    Splits the content of a text file into chunks of specified size.
-
-    :param file_path: Path to the text file to be read.
-    :param chunk_size: The size of each chunk in characters.
-    :return: A list of chunks.
+    Reads all .txt/.md files in data_dir and returns chunks with metadata.
+    Returns: [{"text": "...", "metadata": {"source": "notes1.txt", "chunk_index": 0}}, ...]
     """
     chunks = []
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read()
-            for i in range(0, len(content), chunk_size):
-                chunks.append(content[i:i + chunk_size])
-    except FileNotFoundError:
-        print(f"Error: The file {file_path} was not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    for filename in os.listdir(data_dir):
+        if filename.endswith(('.txt', '.md')):
+            filepath = os.path.join(data_dir, filename)
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
 
+            # Better: chunk by paragraphs or sentences, not just characters
+            # But character-based is fine for learning
+            for i in range(0, len(content), chunk_size - overlap):
+                chunk_text = content[i:i + chunk_size]
+                if len(chunk_text.strip()) > 0:
+                    chunks.append({
+                        "text": chunk_text,
+                        "metadata": {
+                            "source": filename,
+                            "chunk_index": i // (chunk_size - overlap)
+                        }
+                    })
     return chunks
-
-
-def main():
-    file_path = input("Enter the path to the text file: ")
-    chunk_size = int(input("Enter the chunk size (number of characters): "))
-
-    chunks = split_file_into_chunks(file_path, chunk_size)
-
-    for index, chunk in enumerate(chunks):
-        print(f"Chunk {index + 1}:\n{chunk}\n{'-' * 40}")
-
-
-if __name__ == "__main__":
-    main()
