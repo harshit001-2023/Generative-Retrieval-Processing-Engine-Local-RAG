@@ -1,2 +1,7 @@
+Interview question you'll get: "Why chunk size matters?"
+Answer: Too large = LLM context window overflow, irrelevant info dilutes the answer.
+Too small = loses context/semantics. Overlap preserves continuity between chunks.
+
+
 1. File I/O
 -> In this project I learnt File Handling
